@@ -336,15 +336,20 @@ button:hover{
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
             gap: 35px;
+            margin: auto;
+            width: 95%;
             margin-bottom: 60px;
-        }
-
-        .produto-card {
+            margin-top: 40px;
+            padding: 10px;
+            overflow: hidden;
+          }
+          
+          .produto-card {
+            width: 350px;
             background: white;
             border-radius: 16px;
             overflow: hidden;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 2px solid #000000;
             position: relative;
             cursor: pointer;
         }

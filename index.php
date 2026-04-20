@@ -1,3 +1,28 @@
+<?php
+// ============================================
+// CONEXÃO E BUSCA — topo do arquivo, antes do HTML
+// ============================================
+$host     = 'localhost';
+$dbname       = 'realizaImoveis';
+$user     = 'postgres';
+$password = 'admin';
+
+
+try {
+    $pdo = new PDO("pgsql:host=$host;dbname=$dbname", $user, $password);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch(PDOException $e) {
+    die("Erro na conexão: " . $e->getMessage());
+}
+
+try {
+    $stmt = $pdo->prepare("SELECT * FROM produtos WHERE destaque = true ORDER BY id DESC");
+    $stmt->execute();
+    $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
+} catch (PDOException $e) {
+    die("Erro ao buscar produtos: " . $e->getMessage());
+}
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
   <head>
@@ -5,10 +30,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Realiza Móveis</title>
 
-    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="assets/css/cardsPromo.css">
-    <link rel="stylesheet" href="assets/css/cardsPromoIndex.css">
-
+    
+    <link rel="stylesheet" href="style.css">
 
     <script src="assets/js/cliqueCards.js" defer></script>
     <script src="assets/js/mostrarCards.js" defer></script>
@@ -51,56 +75,56 @@
 
 
     <?php if (empty($produtos)): ?>
-            <div class="sem-produtos">
-                <h3>🔍 Nenhum produto encontrado</h3>
-                <p>Tente ajustar os filtros de busca</p>
-            </div>
-        <?php else: ?>
-            <div class="produtos-grid">
-                <?php foreach ($produtos as $produto): ?>
-                    <div class="produto-card" onclick="verProduto(<?php echo $produto['id']; ?>)">
-                        
-                        <div class="product-badge">
-                            <?php echo $produto['em_promocao'] ? 'Oferta' : htmlspecialchars($produto['categoria']); ?>
-                        </div>
+        <div class="sem-produtos">
+            <h3>🔍 Nenhum produto encontrado</h3>
+            <p>Tente ajustar os filtros de busca</p>
+        </div>
+    <?php else: ?>
+        <div class="produtos-grid">
+            <?php foreach ($produtos as $produto): ?>
+                <div class="produto-card" onclick="verProduto(<?php echo $produto['id']; ?>)">
 
-                        <div class="produto-imagem">
-                            <?php 
-                            $imagens = json_decode($produto['imagens'], true);
-                            if ($imagens && count($imagens) > 0): 
-                            ?>
-                                <img src="<?php echo $imagens[0]; ?>" alt="<?php echo htmlspecialchars($produto['nome']); ?>">
+                    <div class="product-badge">
+                        <?php echo $produto['em_promocao'] ? 'Oferta' : htmlspecialchars($produto['categoria']); ?>
+                    </div>
+
+                    <div class="produto-imagem">
+                        <?php
+                        $imagens = json_decode($produto['imagens'], true);
+                        if ($imagens && count($imagens) > 0):
+                        ?>
+                            <img src="<?php echo $imagens[0]; ?>" alt="<?php echo htmlspecialchars($produto['nome']); ?>">
+                        <?php else: ?>
+                            <div style="color: #ccc;">Sem imagem</div>
+                        <?php endif; ?>
+                    </div>
+
+                    <div class="produto-conteudo">
+                        <span class="product-category"><?php echo htmlspecialchars($produto['marca']); ?></span>
+
+                        <h3 class="produto-titulo"><?php echo htmlspecialchars($produto['nome']); ?></h3>
+
+                        <p class="produto-descricao">
+                            <?php echo mb_strimwidth(htmlspecialchars($produto['descricao']), 0, 100, "..."); ?>
+                        </p>
+
+                        <div class="produto-preco-container">
+                            <?php if ($produto['em_promocao']): ?>
+                                <span class="preco-atual">R$ <?php echo number_format($produto['preco_promocional'], 2, ',', '.'); ?></span>
+                                <span class="preco-original-riscado">R$ <?php echo number_format($produto['preco'], 2, ',', '.'); ?></span>
                             <?php else: ?>
-                                <div style="color: #ccc;">Sem imagem</div>
+                                <span class="preco-atual">R$ <?php echo number_format($produto['preco'], 2, ',', '.'); ?></span>
                             <?php endif; ?>
                         </div>
 
-                        <div class="produto-conteudo">
-                            <span class="product-category"><?php echo htmlspecialchars($produto['marca']); ?></span>
-                            
-                            <h3 class="produto-titulo"><?php echo htmlspecialchars($produto['nome']); ?></h3>
-
-                            <p class="produto-descricao">
-                                <?php echo mb_strimwidth(htmlspecialchars($produto['descricao']), 0, 100, "..."); ?>
-                            </p>
-
-                            <div class="produto-preco-container">
-                                <?php if ($produto['em_promocao']): ?>
-                                    <span class="preco-atual">R$ <?php echo number_format($produto['preco_promocional'], 2, ',', '.'); ?></span>
-                                    <span class="preco-original-riscado">R$ <?php echo number_format($produto['preco'], 2, ',', '.'); ?></span>
-                                <?php else: ?>
-                                    <span class="preco-atual">R$ <?php echo number_format($produto['preco'], 2, ',', '.'); ?></span>
-                                <?php endif; ?>
-                            </div>
-
-                            <button class="btn-comprar" onclick="event.stopPropagation(); comprar(<?php echo $produto['id']; ?>)">
-                                ADICIONAR AO CARRINHO
-                            </button>
-                        </div>
+                        <button class="btn-comprar" onclick="event.stopPropagation(); comprar(<?php echo $produto['id']; ?>)">
+                            ADICIONAR AO CARRINHO
+                        </button>
                     </div>
-                <?php endforeach; ?>
-            </div>
-        <?php endif; ?>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    <?php endif; ?>
     
 
     <!-- Cards de Sessões -->
