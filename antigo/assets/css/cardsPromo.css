@@ -1,0 +1,135 @@
+.top-bar {
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: center;
+    height: 40px;
+    background-color: black;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.top-bar-whatsapp, .top-bar-loc {
+    color: #fff;
+    display: flex;
+    flex-direction: row;
+    
+}
+.top-bar-whatsapp a, .top-bar-loc a {
+    display: flex;
+    flex-direction: row;
+    color: #fff;
+    font-size: 15px;
+    text-decoration: none;
+}
+.top-bar-whatsapp a:hover, .top-bar-loc a:hover {
+    text-decoration: underline;
+}
+.top-bar-whatsapp img{
+    width: 30px; 
+    height: 20px;
+    margin-bottom: 10px;
+}
+.top-bar-loc img{
+    width: 25px; 
+    height: 20px;
+    margin-bottom: 10px;
+}
+
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 24px 0;
+    background: #fff;
+}
+
+.logo {
+    width: 280px;
+    max-width: 80%;
+    height: auto;
+}
+
+
+
+.produtos{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    width: 95%;
+    margin: auto;
+    margin-top: 40px;
+}
+.produtos-cards{
+    width: 300px;
+    height: 400px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+    text-align: center;
+    background: #fff;   
+}
+.produtos-cards:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+    cursor: pointer;
+
+}
+.produtos-cards-info-button{
+    margin-top: 10px;
+}
+
+.produtos-cards img{
+    width: 100%;
+    
+}
+
+.sessoes-general {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    width: 95%;
+    margin: auto;
+    margin-top: 20px;
+    border: 2px solid black;
+    border-radius: 20px;
+}
+
+.sessoes-container {
+    width: 70%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 100px;
+    justify-content: center;
+    padding: 20px;
+    
+}
+
+.sessao-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 200px;
+}
+.sessao-card:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+.sessao-card-text {
+    width: 100%;
+    background: black;
+    color: #fff;
+    padding: 10px;
+    border-radius: 0% 0% 20px 20px;
+    text-align: center;
+}
+
+.sessao-card img {
+    width: 100%;
+    height: auto;
+
+}

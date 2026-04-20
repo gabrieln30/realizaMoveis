@@ -33,9 +33,6 @@
     <nav>
       <a href="index.php">Início</a>
       <a href="produtos.php">Produtos</a>
-      <a href="#">Sofás</a>
-      <a href="#">Quartos</a>
-      <a href="#">Cozinha</a>
       <a href="#">Contato</a>
     </nav>
 
@@ -139,7 +136,7 @@
               </div>
 
               <div class="sessao-card">
-                <img src="/assets/imgs/poltronas.webp">
+                <img src="assets/imgs/poltronas.webp">
                 <div class="sessao-card-text">
                   <h3>Poltronas</h3>
                 </div>
@@ -148,14 +145,14 @@
           
                 
               <div class="sessao-card hidden">
-                <img src="/assets/imgs/cadeiras.webp">
+                <img src="assets/imgs/cadeiras.webp">
                 <div class="sessao-card-text">
                 <h3>Cadeira</h3>
                 </div>
               </div>
 
               <div class="sessao-card hidden">
-                <img src="/assets/imgs/rack-estante.webp">
+                <img src="assets/imgs/rack-estante.webp">
                 <div class="sessao-card-text">
                   <h3>Rack / Estante</h3>
                 </div>
@@ -163,7 +160,7 @@
 
 
               <div class="sessao-card hidden">
-                <img src="/assets/imgs/comoda.webp">
+                <img src="assets/imgs/comoda.webp">
                 <div class="sessao-card-text">
                   <h3>Cômoda</h3>
                 </div>
@@ -171,7 +168,7 @@
 
 
               <div class="sessao-card hidden">
-                <img src="/assets/imgs/escrivaninha.webp">
+                <img src="assets/imgs/escrivaninha.webp">
                 <div class="sessao-card-text">
                   <h3>Escrivaninha</h3>
                 </div>
